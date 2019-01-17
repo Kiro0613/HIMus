@@ -16,14 +16,10 @@ namespace EasySurvivalScripts
         [Header("Input Settings")]
         public string MouseXInput;
         public string MouseYInput;
-        public string SwitchPerspectiveInput;
 
         [Header("Common Camera Settings")]
         public float mouseSensitivity;
         public CameraPerspective cameraPerspective;
-
-        [Header("Character Animator")]
-        public Animator CharacterAnimator;
 
         [Header("FPS Camera Settings")]
         public Vector3 FPS_CameraOffset;
@@ -49,18 +45,13 @@ namespace EasySurvivalScripts
         // Use this for initialization
         void Start()
         {
-            if (CharacterAnimator)
-            {
-                Add_FPSCamPositionHelper();
-                Add_TPSCamPositionHelper();
-            }
+
         }
 
         void Add_FPSCamPositionHelper()
         {
             _fpsCameraHelper = new GameObject().transform;
             _fpsCameraHelper.name = "_fpsCameraHelper";
-            _fpsCameraHelper.SetParent(CharacterAnimator.GetBoneTransform(HumanBodyBones.Head));
             _fpsCameraHelper.localPosition = Vector3.zero;
         }
 
@@ -76,63 +67,8 @@ namespace EasySurvivalScripts
         // Update is called once per frame
         void Update()
         {
-            SwitchCameraPerspectiveInput();
-
-            GetSetPerspective();
 
             RotateCamera();
-
-        }
-
-        void SwitchCameraPerspectiveInput()
-        {
-            if(Input.GetButtonDown(SwitchPerspectiveInput))
-            {
-                if (cameraPerspective == CameraPerspective.FirstPerson)
-                {
-                    cameraPerspective = CameraPerspective.ThirdPerson;
-                }
-                else
-                {
-                    cameraPerspective = CameraPerspective.FirstPerson;
-                }
-            }
-
-        }
-
-        void GetSetPerspective()
-        {
-            switch (cameraPerspective)
-            {
-                case CameraPerspective.FirstPerson:
-                    SetCameraHelperPosition_FPS();
-                    break;
-
-                case CameraPerspective.ThirdPerson:
-                    SetCameraHelperPosition_TPS();
-                    break;
-            }
-        }
-
-        void SetCameraHelperPosition_FPS()
-        {
-            if (!CharacterAnimator)
-                return;
-
-            _fpsCameraHelper.localPosition = FPS_CameraOffset;
-
-            transform.position = _fpsCameraHelper.position;
-
-        }
-
-        void SetCameraHelperPosition_TPS()
-        {
-            if (!CharacterAnimator)
-                return;
-
-            _tpsCameraHelper.localPosition = TPS_CameraOffset;
-
-            transform.position = _tpsCameraHelper.position;
 
         }
 
