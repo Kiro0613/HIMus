@@ -10,6 +10,7 @@ TagManager:
   - display
   - floor1btn
   - floor2btn
+  - floor0btn
   layers:
   - Default
   - TransparentFX
