@@ -81,7 +81,7 @@ namespace EasySurvivalScripts
 
         void Jump()
         {
-            if (Input.GetButtonDown(JumpInput))
+            if (Input.GetButtonDown(JumpInput) && !elevDoor.doorClosed)
             {
                 StartCoroutine(PerformJumpRoutine());
             }
