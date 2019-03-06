@@ -11,6 +11,7 @@ TagManager:
   - floor1btn
   - floor2btn
   - floor0btn
+  - visionCollider
   layers:
   - Default
   - TransparentFX
