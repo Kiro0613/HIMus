@@ -43,15 +43,7 @@ public class plr : MonoBehaviour
     }
 	
 	private void OnTriggerEnter(Collider item){
-        if(item.tag == "display")
-        {
-            tooltip.text = item.gameObject.GetComponent<Text>().text;
-            bg.gameObject.SetActive(true);
-        }
-        else
-        {
-            nearButton = item.tag;
-        }
+        
 	}
 	
 	private void OnTriggerExit(){
