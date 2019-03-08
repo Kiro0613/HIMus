@@ -17,6 +17,7 @@ TagManager:
   - infoHead
   - infoBody
   - infoFoot
+  - UI
   layers:
   - Default
   - TransparentFX
