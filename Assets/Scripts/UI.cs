@@ -49,25 +49,25 @@ public class UI : MonoBehaviour {
         extraInfoFoot.GetComponent<Text>().text = plr.lookingAt.GetComponent<exhibit_text>().foot;
         extraInfo.GetComponentInChildren<RawImage>().texture = plr.lookingAt.GetComponent<exhibit_text>().pic;
 
-        extraInfo.transform.localPosition = new Vector3(-540, -300, 0);
+        extraInfo.transform.localPosition = new Vector3(-800, -450, 0);
         plr.canMove = false;
         inExtraInfo = true;
     }
 
     public void closeArtifactInfo() {
-        extraInfo.transform.localPosition = new Vector3(-540, 300, 0);
+        extraInfo.transform.localPosition = new Vector3(-800, 450, 0);
         plr.canMove = true;
         inExtraInfo = false;
     }
 
     public void openPauseMenu() {
-        pauseMenu.transform.localPosition = new Vector3(-540, -300, 0);
+        pauseMenu.transform.localPosition = new Vector3(-800, -450, 0);
         plr.canMove = false;
         inPauseMenu = true;
     }
 
     public void closePauseMenu() {
-        pauseMenu.transform.localPosition = new Vector3(-540, 300, 0);
+        pauseMenu.transform.localPosition = new Vector3(-800, 450, 0);
         plr.canMove = true;
         inPauseMenu = false;
     }
