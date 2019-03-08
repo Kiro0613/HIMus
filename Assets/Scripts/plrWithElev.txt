@@ -1,0 +1,70 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class plr : MonoBehaviour {
+    private GameObject player;
+    private Camera cam;
+
+    private GameObject seeMore;
+    private GameObject extraInfo;
+
+    private bool canInteract = false;
+
+    //public GameObject floor1btn;
+    //public GameObject floor2btn;
+    //public static string nearButton = null;
+    //private Vector3 currentFloor;
+    //private Vector3 newFloor;
+
+    // Start is called before the first frame update
+    void Start() {
+        player = GameObject.FindGameObjectWithTag("Player");
+        cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        seeMore = GameObject.FindGameObjectWithTag("seeMore");
+        extraInfo = GameObject.FindGameObjectWithTag("extraInfo");
+    }
+
+    // Update is called once per frame
+    void Update() {
+        //if(Input.GetKeyDown(KeyCode.E) && plr.nearButton != null) {
+        //    if(nearButton == "floor1btn") {
+        //        currentFloor = floor1btn.transform.position;
+        //        newFloor = floor2btn.transform.position;
+        //    } else {
+        //        currentFloor = floor2btn.transform.position;
+        //        newFloor = floor1btn.transform.position;
+        //    }
+
+        //    elevDoor.doorClosed = true;
+        //    Invoke("open", elevDoor.doorDelay);
+        //    Invoke("movePlr", elevDoor.doorDelay / 2);
+        //}
+    }
+
+    void FixedUpdate() {
+        if(Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hitInfo, 5)) {
+            GameObject lookingAt = hitInfo.collider.gameObject;
+            if(lookingAt.tag == "display") {
+                seeMore.SetActive(true);
+
+                Text[] infoBoxes = extraInfo.GetComponentsInChildren<Text>();
+                infoBoxes[0].text = lookingAt.GetComponent<exhibit_text>().head;
+                infoBoxes[1].text = lookingAt.GetComponent<exhibit_text>().body;
+                infoBoxes[2].text = lookingAt.GetComponent<exhibit_text>().foot;
+                extraInfo.GetComponentInChildren<RawImage>().texture = lookingAt.GetComponent<exhibit_text>().pic;
+            }
+        } else {
+            seeMore.SetActive(false);
+        }
+    }
+
+    //void open() {
+    //    elevDoor.doorClosed = false;
+    //}
+
+    //void movePlr() {
+    //    player.transform.position += (newFloor - currentFloor);
+    //}
+}

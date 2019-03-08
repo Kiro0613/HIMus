@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class elevDoor : MonoBehaviour
-{
+public class elevDoor : MonoBehaviour {
     public GameObject elevator;
     private GameObject doorL;
     private GameObject doorR;
@@ -20,8 +19,7 @@ public class elevDoor : MonoBehaviour
     public static int doorDelay = 4;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         doorL = elevator.transform.Find("door/door L").gameObject;
         doorR = elevator.transform.Find("door/door R").gameObject;
 
@@ -33,23 +31,17 @@ public class elevDoor : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         float step = speed * Time.deltaTime;
-
         
-
-        if (doorClosed)
-        {
+        if(doorClosed) {
             doorL.transform.position = Vector3.MoveTowards(doorL.transform.position, new Vector3(targX + closedPos, doorL.transform.position.y, doorL.transform.position.z), step);
             doorR.transform.position = Vector3.MoveTowards(doorR.transform.position, new Vector3(targX + closedPos * -1, doorL.transform.position.y, doorL.transform.position.z), step);
-        }
-        else
-        {
+        } else {
             doorL.transform.position = Vector3.MoveTowards(doorL.transform.position, new Vector3(targX + openPos, doorL.transform.position.y, doorL.transform.position.z), step);
             doorR.transform.position = Vector3.MoveTowards(doorR.transform.position, new Vector3(targX + openPos * -1, doorL.transform.position.y, doorL.transform.position.z), step);
         }
     }
 
-    
+
 }
