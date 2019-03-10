@@ -5,9 +5,8 @@ using UnityEngine;
 public class world : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
-    {
-        
+    void Start() {
+        Application.Quit();
     }
 
     // Update is called once per frame
@@ -15,7 +14,7 @@ public class world : MonoBehaviour
 
     }
 
-    void quit() {
+    static void quit() {
         Application.Quit();
     }
 }

@@ -39,11 +39,10 @@ public class plr : MonoBehaviour {
     }
 
     void FixedUpdate() {
-        if(Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hitInfo, 5)) {
+        if(Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hitInfo, 7) && !ui.inExtraInfo && !ui.inPauseMenu) {
             lookingAt = hitInfo.collider.gameObject;
-            canInteract = true;
             if(lookingAt.tag == "display") {
-
+                canInteract = true;
             }
         } else {
             canInteract = false;

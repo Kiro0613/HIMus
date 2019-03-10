@@ -34,6 +34,16 @@ public class UI : MonoBehaviour {
         }
     }
 
+    void lockCursor() {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    void unlockCursor() {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
     public void showUsePrompt(bool visible) {
         if(visible) {
             seeMore.transform.localPosition = new Vector3(0, -260, 0);
@@ -50,25 +60,33 @@ public class UI : MonoBehaviour {
         extraInfo.GetComponentInChildren<RawImage>().texture = plr.lookingAt.GetComponent<exhibit_text>().pic;
 
         extraInfo.transform.localPosition = new Vector3(-800, -450, 0);
+        unlockCursor();
         plr.canMove = false;
+        plr.canInteract = false;
         inExtraInfo = true;
     }
 
     public void closeArtifactInfo() {
         extraInfo.transform.localPosition = new Vector3(-800, 450, 0);
+        lockCursor();
         plr.canMove = true;
+        plr.canInteract = true;
         inExtraInfo = false;
     }
 
     public void openPauseMenu() {
         pauseMenu.transform.localPosition = new Vector3(-800, -450, 0);
+        unlockCursor();
         plr.canMove = false;
+        plr.canInteract = false;
         inPauseMenu = true;
     }
 
     public void closePauseMenu() {
         pauseMenu.transform.localPosition = new Vector3(-800, 450, 0);
+        lockCursor();
         plr.canMove = true;
+        plr.canInteract = true;
         inPauseMenu = false;
     }
 }
