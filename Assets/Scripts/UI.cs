@@ -27,21 +27,7 @@ public class UI : MonoBehaviour {
     // Update is called once per frame
     public void Update()
     {
-        if(plr.canInteract) {
-            showUsePrompt(true);
-        } else {
-            showUsePrompt(false);
-        }
-    }
-
-    void lockCursor() {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-
-    void unlockCursor() {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        showUsePrompt(plr.canInteract);
     }
 
     public void showUsePrompt(bool visible) {
@@ -52,41 +38,28 @@ public class UI : MonoBehaviour {
         }
     }
 
-    public void openArtifactInfo() {
-        Text[] infoBoxes = extraInfo.GetComponentsInChildren<Text>();
-        extraInfoHead.GetComponent<Text>().text = plr.lookingAt.GetComponent<exhibit_text>().head;
-        extraInfoBody.GetComponent<Text>().text = plr.lookingAt.GetComponent<exhibit_text>().body;
-        extraInfoFoot.GetComponent<Text>().text = plr.lookingAt.GetComponent<exhibit_text>().foot;
-        extraInfo.GetComponentInChildren<RawImage>().texture = plr.lookingAt.GetComponent<exhibit_text>().pic;
+    public void setUIOpen(GameObject element, bool openState) {
+        if(element == extraInfo) {
+            extraInfoHead.GetComponent<Text>().text = plr.lookingAt.GetComponent<exhibit>().head;
+            extraInfoBody.GetComponent<Text>().text = plr.lookingAt.GetComponent<exhibit>().body;
+            extraInfoFoot.GetComponent<Text>().text = plr.lookingAt.GetComponent<exhibit>().foot;
+            extraInfo.GetComponentInChildren<RawImage>().texture = plr.lookingAt.GetComponent<exhibit>().pic;
+        }
 
-        extraInfo.transform.localPosition = new Vector3(-800, -450, 0);
-        unlockCursor();
-        plr.canMove = false;
-        plr.canInteract = false;
-        inExtraInfo = true;
-    }
-
-    public void closeArtifactInfo() {
-        extraInfo.transform.localPosition = new Vector3(-800, 450, 0);
-        lockCursor();
-        plr.canMove = true;
-        plr.canInteract = true;
-        inExtraInfo = false;
-    }
-
-    public void openPauseMenu() {
-        pauseMenu.transform.localPosition = new Vector3(-800, -450, 0);
-        unlockCursor();
-        plr.canMove = false;
-        plr.canInteract = false;
-        inPauseMenu = true;
-    }
-
-    public void closePauseMenu() {
-        pauseMenu.transform.localPosition = new Vector3(-800, 450, 0);
-        lockCursor();
-        plr.canMove = true;
-        plr.canInteract = true;
-        inPauseMenu = false;
+        if(openState) {
+            element.transform.localPosition = new Vector3(-800, -450, 0);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            plr.canMove = false;
+            plr.canInteract = false;
+            inExtraInfo = true;
+        } else {
+            element.transform.localPosition = new Vector3(-800, 450, 0);
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            plr.canMove = true;
+            plr.canInteract = true;
+            inExtraInfo = false;
+        }
     }
 }

@@ -8,7 +8,7 @@ public class plr : MonoBehaviour {
     private Camera cam;
     public static GameObject lookingAt;
     
-    public UI ui;
+    public static UI ui;
 
     public static bool canInteract = false;
     public static bool canMove = true;
@@ -23,17 +23,7 @@ public class plr : MonoBehaviour {
     void Update() {
         if(Input.GetKeyUp(KeyCode.Mouse0) || Input.GetKey(KeyCode.E)){
             if(lookingAt.tag == "display" && canInteract) {
-                ui.openArtifactInfo();
-            }
-        }
-
-        if(Input.GetKeyDown(KeyCode.Escape)) {
-            if(ui.inExtraInfo) {
-                ui.closeArtifactInfo();
-            } else if(ui.inPauseMenu) {
-                ui.closePauseMenu();
-            } else {
-                ui.openPauseMenu();
+                ui.setUIOpen(lookingAt, true);
             }
         }
     }
@@ -48,6 +38,4 @@ public class plr : MonoBehaviour {
             canInteract = false;
         }
     }
-
-    
 }

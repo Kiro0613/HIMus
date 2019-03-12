@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class exhibit_text : MonoBehaviour
+public class exhibit : MonoBehaviour
 {
 	public string head;
     public string body;
